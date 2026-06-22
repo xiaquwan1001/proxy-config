@@ -10,7 +10,6 @@ dns:
   nameserver:
   - 223.5.5.5
   - 119.29.29.29
-external-controller: 127.0.0.1:19090
 ipv6: true
 log-level: info
 mixed-port: 17890
@@ -174,10 +173,6 @@ proxy-groups:
 - interval: 120
   name: 🆓 免费节点
   proxies:
-  - chromego
-  - juicity
-  - naiveproxy
-  - shadowquic
   - hy2-fr1
   - hy2-xyz
   - hy2-fr2
@@ -194,28 +189,12 @@ proxy-groups:
   - vless-reality-ch3
   type: url-test
   url: https://www.gstatic.com/generate_204
-- interval: 300
-  name: Skylink
-  type: url-test
-  url: https://www.gstatic.com/generate_204
-  use:
-  - skylink
 - interval: 60
   name: Proxy
   proxies:
   - 🆓 免费节点
-  - Skylink
   type: fallback
   url: https://www.gstatic.com/generate_204
-proxy-providers:
-  skylink:
-    health-check:
-      enable: true
-      interval: 300
-      url: https://www.gstatic.com/generate_204
-    interval: 86400
-    type: http
-    url: https://sky-subscription.0443.link/simida/skylinx/874519060faf7b54bbe747bfe615f757
 rule-providers:
   apple:
     behavior: domain
@@ -312,4 +291,3 @@ rules:
 - GEOIP,LAN,DIRECT
 - GEOIP,CN,DIRECT
 - MATCH,Proxy
-secret: c0cb07eb91d38ea1420089e56a4b44d1
