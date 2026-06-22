@@ -10,6 +10,7 @@ dns:
   nameserver:
   - 223.5.5.5
   - 119.29.29.29
+external-controller: 127.0.0.1:19090
 ipv6: true
 log-level: info
 mixed-port: 17890
@@ -126,15 +127,15 @@ proxies:
   name: vless-reality-ch1
   network: xhttp
   packet-encoding: xudp
-  port: 54582
+  port: 11330
   reality-opts:
     public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
     short-id: 1ea5bfb5
-  server: 89.144.35.230
+  server: 2a14:7584:d097::a
   servername: www.lovelive-anime.jp
   tls: true
   type: vless
-  uuid: 5cfc52bc-e701-4160-89df-930a0c040576
+  uuid: 53d74aab-6471-4c1b-ace7-fac837d1bfbd
   xhttp-opts:
     mode: auto
     path: /PGEulXbn
@@ -311,3 +312,4 @@ rules:
 - GEOIP,LAN,DIRECT
 - GEOIP,CN,DIRECT
 - MATCH,Proxy
+secret: c0cb07eb91d38ea1420089e56a4b44d1
