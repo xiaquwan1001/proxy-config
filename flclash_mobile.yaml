@@ -1,293 +1,197 @@
+# FlClash 手机极简版 — 完全自包含，无外部依赖
+# 14 个免费节点 + 简单规则
 allow-lan: false
-dns:
-  enable: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fallback:
-  - https://dns.alidns.com/dns-query
-  - https://1.1.1.1/dns-query
-  listen: 0.0.0.0:11053
-  nameserver:
-  - 223.5.5.5
-  - 119.29.29.29
 ipv6: true
 log-level: info
-mixed-port: 17890
 mode: rule
+
 proxies:
-- down: 55 Mbps
-  name: hy2-fr1
-  password: github.com/Alvin9999-newpac/fanqiang
-  port: 64772
-  server: 62.210.124.132
-  skip-cert-verify: true
-  sni: bing.com
-  type: hysteria2
-  up: 11 Mbps
-- down: 55 Mbps
-  name: hy2-xyz
-  password: dongtaiwang.com
-  port: 13377
-  server: www.838491.xyz
-  skip-cert-verify: false
-  sni: www.838491.xyz
-  type: hysteria2
-  up: 11 Mbps
-- down: 55 Mbps
-  name: hy2-fr2
-  password: github.com/Alvin9999-newpac/fanqiang
-  port: 43115
-  server: 62.210.147.2
-  skip-cert-verify: true
-  sni: www.microsoft.com
-  type: hysteria2
-  up: 11 Mbps
-- alpn:
-  - h3
-  congestion-controller: bbr
-  name: tuic-fr1
-  password: dongtaiwang.com
-  port: 33888
-  server: 163.172.118.224
-  skip-cert-verify: true
-  type: tuic
-  uuid: 9adb384a-0f16-4501-a8f3-b6b2556fce87
-- alpn:
-  - h3
-  congestion-controller: bbr
-  name: tuic-oth1
-  password: dongtaiwang.com
-  port: 30006
-  server: 5.178.101.117
-  skip-cert-verify: true
-  type: tuic
-  uuid: 36106e0f-4d9a-470b-a3fd-535f3b7a1e92
-- alpn:
-  - h3
-  congestion-controller: bbr
-  name: tuic-oth2
-  password: dongtaiwang.com
-  port: 17306
-  server: 89.144.35.232
-  skip-cert-verify: true
-  type: tuic
-  uuid: 3ebac90b-6977-47c0-bef5-b2e37554432c
-- alpn:
-  - h3
-  auth-str: dongtaiwang.com
-  down: 55 Mbps
-  name: hy1-fr1
-  port: 20088
-  protocol: udp
-  server: 5.83.129.153
-  skip-cert-verify: true
-  sni: apple.com
-  type: hysteria
-  up: 11 Mbps
-- alpn:
-  - h3
-  auth-str: dongtaiwang.com
-  down: 55 Mbps
-  name: hy1-fr2
-  port: 54177
-  protocol: udp
-  server: 5.83.129.90
-  skip-cert-verify: true
-  sni: apple.com
-  type: hysteria
-  up: 11 Mbps
-- alpn:
-  - h3
-  auth-str: dongtaiwang.com
-  down: 55 Mbps
-  name: hy1-ipv6
-  port: 54177
-  protocol: udp
-  server: 2a14:7584:d097::a
-  skip-cert-verify: true
-  sni: apple.com
-  type: hysteria
-  up: 11 Mbps
-- name: mieru-ch1
-  password: dongtaiwang.com
-  port: 19022
-  server: 156.225.88.93
-  transport: TCP
-  type: mieru
-  username: dongtaiwang.com
-- name: mieru-ch2
-  password: 8n2IZjc7vUJPPEqm
-  port: 19022
-  server: 156.225.88.93
-  transport: TCP
-  type: mieru
-  username: tcp_yuyys0xg
-- client-fingerprint: chrome
-  name: vless-reality-ch1
-  network: xhttp
-  packet-encoding: xudp
-  port: 11330
-  reality-opts:
-    public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
-    short-id: 1ea5bfb5
-  server: 2a14:7584:d097::a
-  servername: www.lovelive-anime.jp
-  tls: true
-  type: vless
-  uuid: 53d74aab-6471-4c1b-ace7-fac837d1bfbd
-  xhttp-opts:
-    mode: auto
-    path: /PGEulXbn
-- client-fingerprint: chrome
-  name: vless-reality-ch2
-  network: xhttp
-  packet-encoding: xudp
-  port: 45641
-  reality-opts:
-    public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
-    short-id: 1ea5bfb5
-  server: 62.210.113.151
-  servername: www.lovelive-anime.jp
-  tls: true
-  type: vless
-  uuid: f2d9e117-231c-4946-87d8-2cde2222b85d
-  xhttp-opts:
-    mode: auto
-    path: /SSSuqkzN
-- client-fingerprint: chrome
-  name: vless-reality-ch3
-  network: xhttp
-  port: 54582
-  reality-opts:
-    public-key: kfw5DgkyKiovC3dzb-o2PUYnZPnbYvbx2IwERUv9czY
-    short-id: 225e2cc8
-  server: 89.144.35.230
-  servername: apple.com
-  tls: true
-  type: vless
-  uuid: 5cfc52bc-e701-4160-89df-930a0c040576
-  xhttp-opts:
-    mode: auto
-    path: 5cfc52bc-e701-4160-89df-930a0c040576-xh
+  # === hysteria2 ×3 ===
+  - name: hy2-fr1
+    type: hysteria2
+    server: 62.210.124.132
+    port: 64772
+    password: github.com/Alvin9999-newpac/fanqiang
+    sni: bing.com
+    skip-cert-verify: true
+    up: 11 Mbps
+    down: 55 Mbps
+  - name: hy2-xyz
+    type: hysteria2
+    server: www.838491.xyz
+    port: 13377
+    password: dongtaiwang.com
+    sni: www.838491.xyz
+    up: 11 Mbps
+    down: 55 Mbps
+  - name: hy2-fr2
+    type: hysteria2
+    server: 62.210.147.2
+    port: 43115
+    password: github.com/Alvin9999-newpac/fanqiang
+    sni: www.microsoft.com
+    skip-cert-verify: true
+    up: 11 Mbps
+    down: 55 Mbps
+
+  # === TUIC ×3 ===
+  - name: tuic-fr1
+    type: tuic
+    server: 163.172.118.224
+    port: 33888
+    uuid: 9adb384a-0f16-4501-a8f3-b6b2556fce87
+    password: dongtaiwang.com
+    alpn: [h3]
+    congestion-controller: bbr
+    skip-cert-verify: true
+  - name: tuic-oth1
+    type: tuic
+    server: 5.178.101.117
+    port: 30006
+    uuid: 36106e0f-4d9a-470b-a3fd-535f3b7a1e92
+    password: dongtaiwang.com
+    alpn: [h3]
+    congestion-controller: bbr
+    skip-cert-verify: true
+  - name: tuic-oth2
+    type: tuic
+    server: 89.144.35.232
+    port: 17306
+    uuid: 3ebac90b-6977-47c0-bef5-b2e37554432c
+    password: dongtaiwang.com
+    alpn: [h3]
+    congestion-controller: bbr
+    skip-cert-verify: true
+
+  # === hysteria v1 ×3 ===
+  - name: hy1-fr1
+    type: hysteria
+    server: 5.83.129.153
+    port: 20088
+    auth-str: dongtaiwang.com
+    protocol: udp
+    up: 11 Mbps
+    down: 55 Mbps
+    alpn: [h3]
+    sni: apple.com
+    skip-cert-verify: true
+  - name: hy1-fr2
+    type: hysteria
+    server: 5.83.129.90
+    port: 54177
+    auth-str: dongtaiwang.com
+    protocol: udp
+    up: 11 Mbps
+    down: 55 Mbps
+    alpn: [h3]
+    sni: apple.com
+    skip-cert-verify: true
+  - name: hy1-ipv6
+    type: hysteria
+    server: 2a14:7584:d097::a
+    port: 54177
+    auth-str: dongtaiwang.com
+    protocol: udp
+    up: 11 Mbps
+    down: 55 Mbps
+    alpn: [h3]
+    sni: apple.com
+    skip-cert-verify: true
+
+  # === mieru ×2 ===
+  - name: mieru-ch1
+    type: mieru
+    server: 156.225.88.93
+    port: 19022
+    username: dongtaiwang.com
+    password: dongtaiwang.com
+    transport: TCP
+  - name: mieru-ch2
+    type: mieru
+    server: 156.225.88.93
+    port: 19022
+    username: tcp_yuyys0xg
+    password: 8n2IZjc7vUJPPEqm
+    transport: TCP
+
+  # === VLESS+REALITY ×3 ===
+  - name: vless-reality-ch1
+    type: vless
+    server: 2a14:7584:d097::a
+    port: 11330
+    uuid: 53d74aab-6471-4c1b-ace7-fac837d1bfbd
+    network: xhttp
+    tls: true
+    servername: www.lovelive-anime.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
+      short-id: 1ea5bfb5
+    xhttp-opts:
+      mode: auto
+      path: /PGEulXbn
+    packet-encoding: xudp
+  - name: vless-reality-ch2
+    type: vless
+    server: 62.210.113.151
+    port: 45641
+    uuid: f2d9e117-231c-4946-87d8-2cde2222b85d
+    network: xhttp
+    tls: true
+    servername: www.lovelive-anime.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
+      short-id: 1ea5bfb5
+    xhttp-opts:
+      mode: auto
+      path: /SSSuqkzN
+    packet-encoding: xudp
+  - name: vless-reality-ch3
+    type: vless
+    server: 89.144.35.230
+    port: 54582
+    uuid: 5cfc52bc-e701-4160-89df-930a0c040576
+    network: xhttp
+    tls: true
+    servername: apple.com
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: kfw5DgkyKiovC3dzb-o2PUYnZPnbYvbx2IwERUv9czY
+      short-id: 225e2cc8
+    xhttp-opts:
+      mode: auto
+      path: 5cfc52bc-e701-4160-89df-930a0c040576-xh
+    packet-encoding: xudp
+
 proxy-groups:
-- interval: 120
-  name: 🆓 免费节点
-  proxies:
-  - hy2-fr1
-  - hy2-xyz
-  - hy2-fr2
-  - tuic-fr1
-  - tuic-oth1
-  - tuic-oth2
-  - hy1-fr1
-  - hy1-fr2
-  - hy1-ipv6
-  - mieru-ch1
-  - mieru-ch2
-  - vless-reality-ch1
-  - vless-reality-ch2
-  - vless-reality-ch3
-  type: url-test
-  url: https://www.gstatic.com/generate_204
-- interval: 60
-  name: Proxy
-  proxies:
-  - 🆓 免费节点
-  type: fallback
-  url: https://www.gstatic.com/generate_204
-rule-providers:
-  apple:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/apple.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt
-  applications:
-    behavior: classical
-    interval: 86400
-    path: ./ruleset/applications.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt
-  cncidr:
-    behavior: ipcidr
-    interval: 86400
-    path: ./ruleset/cncidr.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt
-  direct:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/direct.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt
-  gfw:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/gfw.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt
-  google:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/google.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt
-  icloud:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/icloud.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt
-  lancidr:
-    behavior: ipcidr
-    interval: 86400
-    path: ./ruleset/lancidr.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt
-  private:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/private.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt
-  proxy:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/proxy.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt
-  reject:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/reject.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt
-  telegramcidr:
-    behavior: ipcidr
-    interval: 86400
-    path: ./ruleset/telegramcidr.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt
-  tld-not-cn:
-    behavior: domain
-    interval: 86400
-    path: ./ruleset/tld-not-cn.yaml
-    type: http
-    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt
+  - name: 🆓 免费节点
+    type: url-test
+    proxies:
+      - hy2-fr1
+      - hy2-xyz
+      - hy2-fr2
+      - tuic-fr1
+      - tuic-oth1
+      - tuic-oth2
+      - hy1-fr1
+      - hy1-fr2
+      - hy1-ipv6
+      - mieru-ch1
+      - mieru-ch2
+      - vless-reality-ch1
+      - vless-reality-ch2
+      - vless-reality-ch3
+    url: https://www.gstatic.com/generate_204
+    interval: 120
+
 rules:
-- RULE-SET,applications,DIRECT
-- DOMAIN,clash.razord.top,DIRECT
-- DOMAIN,yacd.haishan.me,DIRECT
-- RULE-SET,private,DIRECT
-- RULE-SET,reject,REJECT
-- RULE-SET,icloud,DIRECT
-- RULE-SET,apple,DIRECT
-- RULE-SET,google,Proxy
-- RULE-SET,proxy,Proxy
-- RULE-SET,direct,DIRECT
-- RULE-SET,lancidr,DIRECT
-- RULE-SET,cncidr,DIRECT
-- RULE-SET,telegramcidr,Proxy
-- GEOIP,LAN,DIRECT
-- GEOIP,CN,DIRECT
-- MATCH,Proxy
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN-KEYWORD,ip6-localhost,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+  - IP-CIDR,17.0.0.0/8,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,🆓 免费节点
