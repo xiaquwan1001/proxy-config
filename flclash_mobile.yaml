@@ -2,6 +2,90 @@ allow-lan: false
 ipv6: true
 log-level: info
 mode: rule
+
+# ── 规则提供器（来自 Loyalsoldier/clash-rules，27k+ stars，成熟规则集）──
+# 每天自动更新一次，走 jsDelivr CDN（国内可达，无需代理）
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+  icloud:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/icloud.yaml
+    interval: 86400
+  apple:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+  google:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
+    interval: 86400
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 86400
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/private.yaml
+    interval: 86400
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
+    interval: 86400
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
+    interval: 86400
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+  applications:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 86400
+
+# ── 免费节点（ChromeGo 提取 + 社区节点）──
 proxies:
 - down: 55 Mbps
   name: hy2-fr1
@@ -157,6 +241,7 @@ proxies:
   xhttp-opts:
     mode: auto
     path: 5cfc52bc-e701-4160-89df-930a0c040576-xh
+
 proxy-groups:
 - interval: 120
   name: 🆓 免费节点
@@ -177,13 +262,22 @@ proxy-groups:
   - vless-reality-ch3
   type: url-test
   url: https://www.gstatic.com/generate_204
+
+# ── 白名单模式分流规则（推荐）──
+# 国内/安全 → DIRECT，免去国外节点访问国内服务的延迟和掉线问题
+# 其余流量 → 🆓 免费节点（自动选最快节点）
 rules:
-- DOMAIN-SUFFIX,local,DIRECT
-- DOMAIN-KEYWORD,ip6-localhost,DIRECT
-- IP-CIDR,10.0.0.0/8,DIRECT
-- IP-CIDR,172.16.0.0/12,DIRECT
-- IP-CIDR,192.168.0.0/16,DIRECT
-- IP-CIDR,100.64.0.0/10,DIRECT
-- IP-CIDR,17.0.0.0/8,DIRECT
-- GEOIP,CN,DIRECT
-- MATCH,🆓 免费节点
+  - RULE-SET,applications,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,reject,REJECT
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,google,🆓 免费节点
+  - RULE-SET,proxy,🆓 免费节点
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - RULE-SET,telegramcidr,🆓 免费节点
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,🆓 免费节点
