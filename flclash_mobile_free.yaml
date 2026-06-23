@@ -1,15 +1,6 @@
-# flclash_mobile.yaml — ChromeGo 免费节点配置（手机端专用）
-#
-# SkyLink 付费订阅（单独添加，不从 GitHub 推送）：
-#   https://sky-subscription.0443.link/simida/skylinx/874519060faf7b54bbe747bfe615f757
-# 在手机 FlClash → 设置 → 订阅中直接添加此 URL 即可。
-#
-# 注意：本配置使用标准 Clash 语法（DOMAIN-SUFFIX / GEOIP / MATCH），
-# 兼容所有 Clash 客户端（包括手机 FlClash）。不包含 rule-provider / RULE-SET。
+# flclash_mobile_free.yaml — ChromeGo 免费节点配置（手机端专用，备用副本）
+# 与 flclash_mobile.yaml 内容一致，chromego-update-all 同时推送到 GitHub
 
-# ════════════════════════════════════════════
-# 核心配置（Android 兼容）
-# ════════════════════════════════════════════
 mixed-port: 18990
 external-controller: 19090
 allow-lan: false
@@ -21,9 +12,6 @@ geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 86400
 
-# ════════════════════════════════════════════
-# DNS 分段配置（防止国内域名 DNS 泄漏到国外）
-# ════════════════════════════════════════════
 dns:
   enable: true
   listen: 0.0.0.0:5353
@@ -44,9 +32,10 @@ dns:
       - 240.0.0.0/4
       - 0.0.0.0/32
 
-# ════════════════════════════════════════════
-# ChromeGo 免费节点（定时从 chromego-update 更新 IP）
-# ════════════════════════════════════════════
+# ── ChromeGo 免费节点（仅手机端适用，标准 Clash 语法）──
+# 不含 rule-provider / RULE-SET（手机 FlClash 不支持）
+# 数据来源：chromego 定时更新推送
+
 proxies:
   - down: 55 Mbps
     name: hy2-fr1
@@ -193,9 +182,6 @@ proxies:
       mode: auto
       path: 5cfc52bc-e701-4160-89df-930a0c040576-xh
 
-# ════════════════════════════════════════════
-# 代理组
-# ════════════════════════════════════════════
 proxy-groups:
   - interval: 120
     name: 🆓 免费节点
@@ -216,13 +202,11 @@ proxy-groups:
     type: url-test
     url: https://www.gstatic.com/generate_204
 
-# ════════════════════════════════════════════
-# 白名单模式分流（标准 Clash 语法，兼容所有客户端）
-# 国内 → DIRECT   免去国外节点中转国内服务的延迟和掉线
+# ── 白名单模式（标准 Clash 语法，兼容手机）──
+# 国内 → DIRECT（免去国外节点访问国内服务的延迟）
 # 其余 → 🆓 免费节点
-# ════════════════════════════════════════════
 rules:
-  # 局域网/私有地址
+  # 局域网/私有
   - DOMAIN-SUFFIX,local,DIRECT
   - DOMAIN-SUFFIX,localhost,DIRECT
   - DOMAIN-SUFFIX,ip6-localhost,DIRECT
@@ -303,7 +287,7 @@ rules:
   - DOMAIN-SUFFIX,myqcloud.com,DIRECT
   - DOMAIN-SUFFIX,clouddn.com,DIRECT
 
-  # 广告 → 拒绝（不命中 GEOIP,CN 的广告域提前拦截）
+  # 广告/追踪 → 拒绝
   - DOMAIN-SUFFIX,doubleclick.net,REJECT
   - DOMAIN-SUFFIX,googlesyndication.com,REJECT
 
