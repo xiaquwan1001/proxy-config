@@ -1,17 +1,13 @@
-# flclash_mobile.yaml — ChromeGo 免费节点配置（手机端专用）
-#
-# SkyLink 付费订阅（单独添加，不从 GitHub 推送）：
-#   https://sky-subscription.0443.link/simida/skylinx/874519060faf7b54bbe747bfe615f757
-# 在手机 FlClash → 设置 → 订阅中直接添加此 URL 即可。
-#
-# 注意：本配置使用标准 Clash 语法（DOMAIN-SUFFIX / GEOIP / MATCH），
-# 兼容所有 Clash 客户端（包括手机 FlClash）。不包含 rule-provider / RULE-SET。
+# flclash_mobile.yaml — ChromeGo 免费节点配置（自动生成）
+# 由 gen_mobile_config.py 从 mihomo config.yaml 提取最新节点 IP 生成
+# 手动修改会被覆盖！请修改 mihomo config.yaml 中的节点定义。
 
-# ════════════════════════════════════════════
-# 核心配置（Android 兼容）
-# ════════════════════════════════════════════
+# 机型支持：手机 FlClash / Clash Meta for Android / Surfboard
+# 规则语法：标准 Clash DOMAIN-SUFFIX / GEOIP / MATCH（兼容所有客户端）
+
+# ── 核心 ──
 mixed-port: 18990
-external-controller: 19090
+external-controller: 127.0.0.1:19090
 allow-lan: false
 ipv6: false
 log-level: info
@@ -21,9 +17,7 @@ geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 86400
 
-# ════════════════════════════════════════════
-# DNS 分段配置（防止国内域名 DNS 泄漏到国外）
-# ════════════════════════════════════════════
+# ── DNS ──
 dns:
   enable: true
   listen: 0.0.0.0:5353
@@ -44,161 +38,160 @@ dns:
       - 240.0.0.0/4
       - 0.0.0.0/32
 
-# ════════════════════════════════════════════
-# ChromeGo 免费节点（定时从 chromego-update 更新 IP）
-# ════════════════════════════════════════════
+# ── ChromeGo 免费节点（从 mihomo config.yaml 实时提取）──
+# 数据来源：chrome-update 从 GitLab 拉取的最新 IP
+# 生成时间：自动
+# 节点数：13
 proxies:
-  - down: 55 Mbps
-    name: hy2-fr1
-    password: github.com/Alvin9999-newpac/fanqiang
-    port: 64772
+  - name: "hy2-fr1"
+    type: hysteria2
     server: 62.210.124.132
-    skip-cert-verify: true
-    sni: bing.com
-    type: hysteria2
-    up: 11 Mbps
-  - down: 55 Mbps
-    name: hy2-xyz
-    password: dongtaiwang.com
-    port: 13377
-    server: www.838491.xyz
-    skip-cert-verify: false
-    sni: www.838491.xyz
-    type: hysteria2
-    up: 11 Mbps
-  - down: 55 Mbps
-    name: hy2-fr2
+    port: 64772
     password: github.com/Alvin9999-newpac/fanqiang
-    port: 43115
-    server: 62.210.147.2
+    sni: bing.com
     skip-cert-verify: true
-    sni: www.microsoft.com
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy2-xyz"
     type: hysteria2
-    up: 11 Mbps
-  - alpn:
-      - h3
-    congestion-controller: bbr
-    name: tuic-oth1
+    server: www.838491.xyz
+    port: 13377
     password: dongtaiwang.com
-    port: 30006
+    sni: www.838491.xyz
+    skip-cert-verify: false
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy2-fr2"
+    type: hysteria2
+    server: 62.210.147.2
+    port: 43115
+    password: github.com/Alvin9999-newpac/fanqiang
+    sni: www.microsoft.com
+    skip-cert-verify: true
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "tuic-oth1"
+    type: tuic
     server: 5.178.101.117
-    skip-cert-verify: true
-    type: tuic
+    port: 30006
     uuid: 36106e0f-4d9a-470b-a3fd-535f3b7a1e92
-  - alpn:
-      - h3
+    password: dongtaiwang.com
     congestion-controller: bbr
-    name: tuic-oth2
-    password: dongtaiwang.com
-    port: 17306
-    server: 89.144.35.232
+    alpn:
+      - h3
     skip-cert-verify: true
+  - name: "tuic-oth2"
     type: tuic
+    server: 89.144.35.232
+    port: 17306
     uuid: 3ebac90b-6977-47c0-bef5-b2e37554432c
-  - alpn:
-      - h3
-    auth-str: dongtaiwang.com
-    down: 55 Mbps
-    name: hy1-fr1
-    port: 20088
-    protocol: udp
-    server: 5.83.129.153
-    skip-cert-verify: true
-    sni: apple.com
-    type: hysteria
-    up: 11 Mbps
-  - alpn:
-      - h3
-    auth-str: dongtaiwang.com
-    down: 55 Mbps
-    name: hy1-fr2
-    port: 54177
-    protocol: udp
-    server: 5.83.129.90
-    skip-cert-verify: true
-    sni: apple.com
-    type: hysteria
-    up: 11 Mbps
-  - alpn:
-      - h3
-    auth-str: dongtaiwang.com
-    down: 55 Mbps
-    name: hy1-ipv6
-    port: 54177
-    protocol: udp
-    server: 2a14:7584:d097::a
-    skip-cert-verify: true
-    sni: apple.com
-    type: hysteria
-    up: 11 Mbps
-  - name: mieru-ch1
     password: dongtaiwang.com
-    port: 19022
-    server: 156.225.88.93
-    transport: TCP
+    congestion-controller: bbr
+    alpn:
+      - h3
+    skip-cert-verify: true
+  - name: "hy1-fr1"
+    type: hysteria
+    server: 5.83.129.153
+    port: 20088
+    auth-str: dongtaiwang.com
+    sni: apple.com
+    skip-cert-verify: true
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy1-fr2"
+    type: hysteria
+    server: 5.83.129.90
+    port: 54177
+    auth-str: dongtaiwang.com
+    sni: apple.com
+    skip-cert-verify: true
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy1-ipv6"
+    type: hysteria
+    server: "2a14:7584:d097::a"
+    port: 54177
+    auth-str: dongtaiwang.com
+    sni: apple.com
+    skip-cert-verify: true
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "mieru-ch1"
     type: mieru
+    server: 156.225.88.93
+    port: 19022
+    transport: TCP
     username: dongtaiwang.com
-  - name: mieru-ch2
-    password: 8n2IZjc7vUJPPEqm
-    port: 19022
-    server: 156.225.88.93
-    transport: TCP
+    password: dongtaiwang.com
+  - name: "mieru-ch2"
     type: mieru
+    server: 156.225.88.93
+    port: 19022
+    transport: TCP
     username: tcp_yuyys0xg
-  - client-fingerprint: chrome
-    name: vless-reality-ch1
-    network: xhttp
-    packet-encoding: xudp
+    password: 8n2IZjc7vUJPPEqm
+  - name: "vless-reality-ch1"
+    type: vless
+    server: "2a14:7584:d097::a"
     port: 11330
-    reality-opts:
-      public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
-      short-id: 1ea5bfb5
-    server: 2a14:7584:d097::a
-    servername: www.lovelive-anime.jp
-    tls: true
-    type: vless
     uuid: 53d74aab-6471-4c1b-ace7-fac837d1bfbd
-    xhttp-opts:
-      mode: auto
-      path: /PGEulXbn
-  - client-fingerprint: chrome
-    name: vless-reality-ch2
-    network: xhttp
     packet-encoding: xudp
-    port: 45641
+    tls: true
+    servername: www.lovelive-anime.jp
+    client-fingerprint: chrome
     reality-opts:
       public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
       short-id: 1ea5bfb5
-    server: 62.210.113.151
-    servername: www.lovelive-anime.jp
-    tls: true
-    type: vless
-    uuid: f2d9e117-231c-4946-87d8-2cde2222b85d
-    xhttp-opts:
-      mode: auto
-      path: /SSSuqkzN
-  - client-fingerprint: chrome
-    name: vless-reality-ch3
     network: xhttp
+    xhttp-opts:
+      path: /PGEulXbn
+      mode: auto
+  - name: "vless-reality-ch2"
+    type: vless
+    server: 62.210.113.151
+    port: 45641
+    uuid: f2d9e117-231c-4946-87d8-2cde2222b85d
+    packet-encoding: xudp
+    tls: true
+    servername: www.lovelive-anime.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
+      short-id: 1ea5bfb5
+    network: xhttp
+    xhttp-opts:
+      path: /SSSuqkzN
+      mode: auto
+  - name: "vless-reality-ch3"
+    type: vless
+    server: 89.144.35.230
     port: 54582
+    uuid: 5cfc52bc-e701-4160-89df-930a0c040576
+    tls: true
+    servername: apple.com
+    client-fingerprint: chrome
     reality-opts:
       public-key: kfw5DgkyKiovC3dzb-o2PUYnZPnbYvbx2IwERUv9czY
       short-id: 225e2cc8
-    server: 89.144.35.230
-    servername: apple.com
-    tls: true
-    type: vless
-    uuid: 5cfc52bc-e701-4160-89df-930a0c040576
+    network: xhttp
     xhttp-opts:
-      mode: auto
       path: 5cfc52bc-e701-4160-89df-930a0c040576-xh
+      mode: auto
 
-# ════════════════════════════════════════════
-# 代理组
-# ════════════════════════════════════════════
+# ── 代理组 ──
 proxy-groups:
-  - interval: 120
-    name: 🆓 免费节点
+  - name: 🆓 免费节点
+    type: url-test
     proxies:
       - hy2-fr1
       - hy2-xyz
@@ -213,16 +206,12 @@ proxy-groups:
       - vless-reality-ch1
       - vless-reality-ch2
       - vless-reality-ch3
-    type: url-test
     url: https://www.gstatic.com/generate_204
+    interval: 120
 
-# ════════════════════════════════════════════
-# 白名单模式分流（标准 Clash 语法，兼容所有客户端）
-# 国内 → DIRECT   免去国外节点中转国内服务的延迟和掉线
-# 其余 → 🆓 免费节点
-# ════════════════════════════════════════════
+# ── 白名单模式分流（标准 Clash 语法，兼容 FlClash）──
+# 国内 → DIRECT  国外 → 🆓 免费节点
 rules:
-  # 局域网/私有地址
   - DOMAIN-SUFFIX,local,DIRECT
   - DOMAIN-SUFFIX,localhost,DIRECT
   - DOMAIN-SUFFIX,ip6-localhost,DIRECT
@@ -236,8 +225,6 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT
   - IP-CIDR,198.18.0.0/16,DIRECT
   - IP-CIDR,224.0.0.0/4,DIRECT
-
-  # 国内核心服务 → 直连
   - DOMAIN-SUFFIX,baidu.com,DIRECT
   - DOMAIN-SUFFIX,bdstatic.com,DIRECT
   - DOMAIN-SUFFIX,bcebos.com,DIRECT
@@ -302,13 +289,7 @@ rules:
   - DOMAIN-SUFFIX,aliyuncs.com,DIRECT
   - DOMAIN-SUFFIX,myqcloud.com,DIRECT
   - DOMAIN-SUFFIX,clouddn.com,DIRECT
-
-  # 广告 → 拒绝（不命中 GEOIP,CN 的广告域提前拦截）
   - DOMAIN-SUFFIX,doubleclick.net,REJECT
   - DOMAIN-SUFFIX,googlesyndication.com,REJECT
-
-  # 中国 IP → 直连（兜底国内流量）
   - GEOIP,CN,DIRECT
-
-  # 兜底：未命中规则的流量走免费节点（白名单模式）
   - MATCH,🆓 免费节点
