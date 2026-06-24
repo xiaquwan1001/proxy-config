@@ -190,6 +190,11 @@ proxies:
 
 # ── 代理组 ──
 proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - 🆓 免费节点
+      - DIRECT
   - name: 🆓 免费节点
     type: url-test
     proxies:
