@@ -1,0 +1,239 @@
+# ═══════════════════════════════════════════════════════
+# ChromeGo 免费节点 + Loyalsoldier 规则集
+# 适用于 Clash Meta / mihomo 内核
+# 自动生成，手动修改会被覆盖
+# ═══════════════════════════════════════════════════════
+
+# ── 核心 ──
+mixed-port: 18990
+external-controller: 127.0.0.1:19090
+allow-lan: false
+ipv6: false
+log-level: info
+mode: rule
+find-process-mode: off
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 86400
+
+# ── DNS ──
+dns:
+  enable: true
+  listen: 0.0.0.0:5353
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://dns.google/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+
+# ── 规则提供者（Loyalsoldier）──
+# 首次启动：Clash 异步下载，下载失败不阻塞，由 MATCH 兜底
+rule-providers:
+  reject:
+    type: http
+    behavior: classical
+    url: "https://github.com/Loyalsoldier/clash-rules/releases/latest/download/reject.txt"
+    interval: 86400
+  proxy:
+    type: http
+    behavior: classical
+    url: "https://github.com/Loyalsoldier/clash-rules/releases/latest/download/proxy.txt"
+    interval: 86400
+  direct:
+    type: http
+    behavior: classical
+    url: "https://github.com/Loyalsoldier/clash-rules/releases/latest/download/direct.txt"
+    interval: 86400
+
+# ── ChromeGo 免费节点（从 GitLab 拉取的最新 IP）──
+proxies:
+  - name: "hy2-fr1"
+    type: hysteria2
+    server: 62.210.124.132
+    port: 64772
+    password: github.com/Alvin9999-newpac/fanqiang
+    sni: bing.com
+    skip-cert-verify: true
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy2-xyz"
+    type: hysteria2
+    server: www.838491.xyz
+    port: 13377
+    password: dongtaiwang.com
+    sni: www.838491.xyz
+    skip-cert-verify: false
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy2-fr2"
+    type: hysteria2
+    server: 62.210.147.2
+    port: 43115
+    password: github.com/Alvin9999-newpac/fanqiang
+    sni: www.microsoft.com
+    skip-cert-verify: true
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "tuic-oth1"
+    type: tuic
+    server: 5.178.101.117
+    port: 30006
+    uuid: 36106e0f-4d9a-470b-a3fd-535f3b7a1e92
+    password: dongtaiwang.com
+    congestion-controller: bbr
+    alpn:
+      - h3
+    skip-cert-verify: true
+  - name: "tuic-oth2"
+    type: tuic
+    server: 89.144.35.232
+    port: 17306
+    uuid: 3ebac90b-6977-47c0-bef5-b2e37554432c
+    password: dongtaiwang.com
+    congestion-controller: bbr
+    alpn:
+      - h3
+    skip-cert-verify: true
+  - name: "hy1-fr1"
+    type: hysteria
+    server: 5.83.129.153
+    port: 20088
+    auth-str: dongtaiwang.com
+    sni: apple.com
+    skip-cert-verify: true
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy1-fr2"
+    type: hysteria
+    server: 5.83.129.90
+    port: 54177
+    auth-str: dongtaiwang.com
+    sni: apple.com
+    skip-cert-verify: true
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "hy1-ipv6"
+    type: hysteria
+    server: "2a14:7584:d097::a"
+    port: 54177
+    auth-str: dongtaiwang.com
+    sni: apple.com
+    skip-cert-verify: true
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+  - name: "mieru-ch1"
+    type: mieru
+    server: 156.225.88.93
+    port: 19022
+    transport: TCP
+    username: dongtaiwang.com
+    password: dongtaiwang.com
+  - name: "mieru-ch2"
+    type: mieru
+    server: 156.225.88.93
+    port: 19022
+    transport: TCP
+    username: tcp_yuyys0xg
+    password: 8n2IZjc7vUJPPEqm
+  - name: "vless-reality-ch1"
+    type: vless
+    server: "2a14:7584:d097::a"
+    port: 11330
+    uuid: 53d74aab-6471-4c1b-ace7-fac837d1bfbd
+    packet-encoding: xudp
+    tls: true
+    servername: www.lovelive-anime.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
+      short-id: 1ea5bfb5
+    network: xhttp
+    xhttp-opts:
+      path: /PGEulXbn
+      mode: auto
+  - name: "vless-reality-ch2"
+    type: vless
+    server: 62.210.113.151
+    port: 45641
+    uuid: f2d9e117-231c-4946-87d8-2cde2222b85d
+    packet-encoding: xudp
+    tls: true
+    servername: www.lovelive-anime.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: Nw-FuuCWzFZvQtQbJjDCYJpCKyO8cuvibbTGBeoZRyo
+      short-id: 1ea5bfb5
+    network: xhttp
+    xhttp-opts:
+      path: /SSSuqkzN
+      mode: auto
+  - name: "vless-reality-ch3"
+    type: vless
+    server: 89.144.35.230
+    port: 54582
+    uuid: 5cfc52bc-e701-4160-89df-930a0c040576
+    tls: true
+    servername: apple.com
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: kfw5DgkyKiovC3dzb-o2PUYnZPnbYvbx2IwERUv9czY
+      short-id: 225e2cc8
+    network: xhttp
+    xhttp-opts:
+      path: 5cfc52bc-e701-4160-89df-930a0c040576-xh
+      mode: auto
+
+# ── 代理组 ──
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - 🆓 免费节点
+      - DIRECT
+  - name: 🆓 免费节点
+    type: url-test
+    proxies:
+      - hy2-fr1
+      - hy2-xyz
+      - hy2-fr2
+      - tuic-oth1
+      - tuic-oth2
+      - hy1-fr1
+      - hy1-fr2
+      - hy1-ipv6
+      - mieru-ch1
+      - mieru-ch2
+      - vless-reality-ch1
+      - vless-reality-ch2
+      - vless-reality-ch3
+    url: https://www.gstatic.com/generate_204
+    interval: 120
+
+# ── 分流规则 ──
+# Loyalsoldier 规则集异步下载，失败时由 GEOIP/MATCH 兜底
+rules:
+  - RULE-SET,reject,REJECT
+  - RULE-SET,proxy,Proxy
+  - RULE-SET,direct,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy
