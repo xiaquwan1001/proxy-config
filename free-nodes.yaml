@@ -228,6 +228,24 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 120
   - name: 🆓 免费节点
+    type: url-test
+    proxies:
+      - hy2-fr1
+      - hy2-xyz
+      - hy2-fr2
+      - tuic-oth1
+      - tuic-oth2
+      - hy1-fr1
+      - hy1-fr2
+      - hy1-ipv6
+      - mieru-ch1
+      - mieru-ch2
+      - vless-reality-ch1
+      - vless-reality-ch2
+      - vless-reality-ch3
+    url: https://www.gstatic.com/generate_204
+    interval: 120
+
 rules:
   - RULE-SET,reject,REJECT
   - RULE-SET,proxy,Proxy
