@@ -207,7 +207,7 @@ proxies:
 proxy-providers:
   FreeProxyGo:
     type: http
-    url: "https://raw.githubusercontent.com/xiaquwan1001/proxy-config/master/FreeProxyGo.yaml"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/xiaquwan1001/proxy-config/master/FreeProxyGo.yaml"
     interval: 3600
     health-check:
       enable: true
