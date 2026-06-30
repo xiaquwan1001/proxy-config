@@ -207,7 +207,7 @@ proxies:
 proxy-providers:
   FreeProxyGo:
     type: http
-    url: "https://gh-proxy.com/https://raw.githubusercontent.com/xiaquwan1001/proxy-config/master/FreeProxyGo.yaml"
+    url: "https://api.v1.mk/sub?target=clash&url=https%3A%2F%2Fsub.proxygo.org%2Fv2ray.php%3Fkey%3Df99e682a0cd6cdfb0da9e5d1eaec8d1c&insert=false"
     interval: 3600
     health-check:
       enable: true
